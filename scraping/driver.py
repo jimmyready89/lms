@@ -15,4 +15,9 @@ def create_drive() -> webdriver:
     driver = webdriver.Chrome(
         service=service, options=options)
 
+    url = driver.command_executor._url
+    session_id = driver.session_id
+
+    print(url, session_id)
+
     return driver

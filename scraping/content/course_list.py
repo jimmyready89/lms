@@ -7,7 +7,7 @@ from config import emailBNS, passwordBNS
 from time import sleep
 
 
-def loginBinus(driver: webdriver) -> bool:
+def courseList(driver: webdriver) -> bool:
     statusLogin = True
 
     driver.get("https://newbinusmaya.binus.ac.id/")
