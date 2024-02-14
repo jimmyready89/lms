@@ -2,49 +2,40 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from time import sleep
 
-url = "http://localhost:57126"
-session_id = "80b8c7f48ae95782c153fb8afab59b74"
+url = "http://localhost:62496"
+session_id = "c7089c7532b3721f8558d98978fb8bc3"
 
 options = webdriver.ChromeOptions()
 driver = webdriver.Remote(command_executor=url, options=options)
 driver.close()
 driver.session_id = session_id
 
-driver.get("https://newbinusmaya.binus.ac.id/lms/course")
+driver.get("https://newbinusmaya.binus.ac.id/lms/course/22c043c1-ea61-4e2d-a846-66c04cc63cde/forum")
 
-CoursesParam = ".label-filter+div"
-CoursesOptionParam = ".dd__menu-list .dd__option"
+sleep(3)
 
-CoursesSelect = driver.find_element(by=By.CSS_SELECTOR,
-                                    value=CoursesParam)
-CoursesSelect.click()
+CoursesTypeParam = ".container-fluid .nav-tabs a"
+CoursesTypeElementList = driver.find_elements(by=By.CSS_SELECTOR,
+                                              value=CoursesTypeParam)
 
-CoursesOptionCount = len(
-    driver.find_elements(by=By.CSS_SELECTOR,
-                         value=CoursesOptionParam)
-)
-CoursesSelect.click()
+CoursesList = []
+for CoursesType in CoursesTypeElementList:
+    CoursesTypeText = CoursesType.text
+    CoursesType.click()
 
-URLList = []
-for OptionNumber in range(CoursesOptionCount):
-    Text = ""
+    sleep(3)
 
-    CoursesSelect = driver.find_element(by=By.CSS_SELECTOR,
-                                        value=CoursesParam)
-    CoursesSelect.click()
+    CoursesTypeParam = ".container-fluid .c-page-region a"
+    CoursesElementList = driver.find_elements(by=By.CSS_SELECTOR,
+                                              value=CoursesTypeParam)
 
-    sleep(1)
+    for Courses in CoursesElementList:
+        CoursesText = Courses.text
 
-    CoursesOption = driver.find_elements(by=By.CSS_SELECTOR,
-                                         value=CoursesOptionParam)
-    Text = CoursesOption[OptionNumber].text
-    CoursesOption[OptionNumber].click()
+        CoursesList.append({
+            "Name": CoursesText,
+            "Type": CoursesTypeText,
+            "URL": Courses.get_attribute("href")
+        })
 
-    sleep(1)
-
-    URLList.append({
-        "Text": Text,
-        "URL": driver.current_url
-    })
-
-print(URLList)
+print(CoursesList)

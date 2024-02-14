@@ -1,56 +1,35 @@
 from selenium import webdriver
-from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.common.exceptions import TimeoutException
-from config import emailBNS, passwordBNS
 from time import sleep
 
 
-def courseList(driver: webdriver) -> bool:
-    statusLogin = True
+def courseList(driver: webdriver) -> list:
+    driver.get("https://newbinusmaya.binus.ac.id/lms/course")
 
-    driver.get("https://newbinusmaya.binus.ac.id/")
+    sleep(3)
 
-    wait10Sec = WebDriverWait(driver, 10)
+    CoursesTypeParam = ".container-fluid .nav-tabs a"
+    CoursesTypeElementList = driver.find_elements(by=By.CSS_SELECTOR,
+                                                  value=CoursesTypeParam)
 
-    # wait button logout
-    try:
-        FindElementParam = (By.XPATH, "//button[text()='Logout']")
-        ButtonLogout = wait10Sec.until(
-            EC.visibility_of_element_located(FindElementParam)
-        )
-        ButtonLogout.click()
-    except TimeoutException:
-        pass
+    CoursesList = []
+    for CoursesType in CoursesTypeElementList:
+        CoursesTypeText = CoursesType.text
+        CoursesType.click()
 
-    wait30Sec = WebDriverWait(driver, 30)
+        sleep(3)
 
-    try:
-        # input email
-        loginfmt = wait30Sec.until(
-            EC.visibility_of_element_located(
-                (By.CSS_SELECTOR, "[name=loginfmt]")
-            )
-        )
-        loginfmt.send_keys(emailBNS)
-        driver.find_element(by=By.CSS_SELECTOR, value="#idSIButton9").click()
-        del loginfmt
+        CoursesTypeParam = ".container-fluid .c-page-region a"
+        CoursesElementList = driver.find_elements(by=By.CSS_SELECTOR,
+                                                  value=CoursesTypeParam)
 
-        # input password
-        passwd = wait30Sec.until(
-            EC.visibility_of_element_located(
-                (By.CSS_SELECTOR, "[name=passwd]"))
-            )
-        passwd.send_keys(passwordBNS)
-        driver.find_element(by=By.CSS_SELECTOR, value="#idSIButton9").click()
-        del passwd
-    except TimeoutException:
-        current = driver.current_url
-        if not (current.find("/lms/dashboard") != -1):
-            statusLogin = False
+        for Courses in CoursesElementList:
+            CoursesText = Courses.text
 
-    del wait10Sec
-    del wait30Sec
+            CoursesList.append({
+                "Name": CoursesText,
+                "Type": CoursesTypeText,
+                "URL": Courses.get_attribute("href")
+            })
 
-    return statusLogin
+    return CoursesList
