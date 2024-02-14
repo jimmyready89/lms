@@ -2,3 +2,5 @@ config
 __pycache__
 chrome-win64
 chromedriver-win64
+profile
+.venv
