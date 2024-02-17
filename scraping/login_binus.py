@@ -23,11 +23,11 @@ def loginBinus(driver: webdriver) -> bool:
     except TimeoutException:
         pass
 
-    wait30Sec = WebDriverWait(driver, 30)
+    wait15Sec = WebDriverWait(driver, 15)
 
     try:
         # input email
-        loginfmt = wait30Sec.until(
+        loginfmt = wait15Sec.until(
             EC.visibility_of_element_located(
                 (By.CSS_SELECTOR, "[name=loginfmt]")
             )
@@ -37,19 +37,28 @@ def loginBinus(driver: webdriver) -> bool:
         del loginfmt
 
         # input password
-        passwd = wait30Sec.until(
+        passwd = wait15Sec.until(
             EC.visibility_of_element_located(
                 (By.CSS_SELECTOR, "[name=passwd]"))
             )
         passwd.send_keys(passwordBNS)
         driver.find_element(by=By.CSS_SELECTOR, value="#idSIButton9").click()
         del passwd
+
+        # Confirm yes 
+        displayName = wait15Sec.until(
+            EC.visibility_of_element_located(
+                (By.CSS_SELECTOR, "#displayName")
+            )
+        )
+        driver.find_element(by=By.CSS_SELECTOR, value="#idSIButton9").click()
+        del displayName
     except TimeoutException:
         current = driver.current_url
         if not (current.find("/lms/dashboard") != -1):
             statusLogin = False
 
     del wait10Sec
-    del wait30Sec
+    del wait15Sec
 
     return statusLogin
