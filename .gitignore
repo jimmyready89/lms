@@ -1,4 +1,5 @@
 config/binus_autentication.py
+debug/remote.py
 __pycache__
 chrome-win64
 chromedriver-win64
