@@ -1,6 +1,8 @@
-config
+config/binus_autentication.py
 __pycache__
 chrome-win64
 chromedriver-win64
 profile
 .venv
+.env
+db.sqlite3
