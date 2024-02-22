@@ -1,1 +1,2 @@
+# https://flake8.pycqa.org/en/latest/
 flake8==7.0.0
