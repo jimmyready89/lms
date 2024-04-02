@@ -7,8 +7,8 @@ from time import sleep
 
 def CollectGroup(driver: webdriver, CourseURL: str) -> object:
     GroupInformation = {
-        "Number" : 0,
-        "StudentList" : []
+        "Number": 0,
+        "StudentList": []
     }
 
     driver.get(f"{CourseURL}/people/group")
@@ -17,15 +17,15 @@ def CollectGroup(driver: webdriver, CourseURL: str) -> object:
 
     OpenDetailParam = "div.tab-pane.active div.d-flex.align-items-center.pointer svg"
     OpenDetailElement = driver.find_element(by=By.CSS_SELECTOR,
-                                                value=OpenDetailParam)
+                                            value=OpenDetailParam)
     ActionChains(driver)\
         .move_to_element(OpenDetailElement)\
         .click()\
         .perform()
-    
+
     PageHTML = driver.page_source
     PageSoup = BeautifulSoup(PageHTML, 'html.parser')
-    
+
     TabSoup = PageSoup.find("div", {"class": "tab-pane active"})
 
     GroupSoup = TabSoup.find("span", {"class": "font-weight-bold"})

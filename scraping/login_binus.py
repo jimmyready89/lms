@@ -40,12 +40,12 @@ def loginBinus(driver: webdriver) -> bool:
         passwd = wait15Sec.until(
             EC.visibility_of_element_located(
                 (By.CSS_SELECTOR, "[name=passwd]"))
-            )
+        )
         passwd.send_keys(passwordBNS)
         driver.find_element(by=By.CSS_SELECTOR, value="#idSIButton9").click()
         del passwd
 
-        # Confirm yes 
+        # Confirm yes
         displayName = wait15Sec.until(
             EC.visibility_of_element_located(
                 (By.CSS_SELECTOR, "#displayName")

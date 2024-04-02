@@ -1,26 +1,27 @@
 from bs4 import BeautifulSoup
 
 
-def PeopleDetailFormating(PeopleSoup, Type:str) -> object:
+def PeopleDetailFormating(PeopleSoup, Type: str) -> object:
     People = {}
 
     People["Type"] = Type
     People["Name"] = PeopleSoup.find("div", {"class": "text-name"}).text
     try:
         People["ProgramName"] = PeopleSoup.find("div", {"class": "program-name"}).text
-    except:
+    except BaseException:
         People["ProgramName"] = ""
 
-    PeopleTextIdClassSoup =  PeopleSoup.find_all("div", {"class": "text-id"})
+    PeopleTextIdClassSoup = PeopleSoup.find_all("div", {"class": "text-id"})
     People["Email"] = PeopleTextIdClassSoup[0].text
     People["Id"] = PeopleTextIdClassSoup[1].text
 
     return People
 
-def PeopleFormting(Soup: BeautifulSoup, UserType:str="") -> list:
+
+def PeopleFormting(Soup: BeautifulSoup, UserType: str = "") -> list:
     PeopleList = []
 
-    PeopleTabSoup = Soup.find("div", {"class":"tab-pane active"})
+    PeopleTabSoup = Soup.find("div", {"class": "tab-pane active"})
     StudentSoupList = PeopleTabSoup.find_all("div", {"class": "tiles-item"})
     for StudentSoup in StudentSoupList:
         People = PeopleDetailFormating(StudentSoup, UserType)

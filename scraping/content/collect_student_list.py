@@ -14,7 +14,7 @@ def CollectStudentList(driver: webdriver, CourseURL: str) -> list:
 
     SelectParam = ".dd__control"
     SelectElementList = driver.find_elements(by=By.CSS_SELECTOR,
-                                                value=SelectParam)
+                                             value=SelectParam)
     SelectElement = SelectElementList[1]
     ActionChains(driver)\
         .move_to_element(SelectElement)\
@@ -25,8 +25,8 @@ def CollectStudentList(driver: webdriver, CourseURL: str) -> list:
 
     OptionParam = ".dd__menu-list > div"
     OptionElementList = driver.find_elements(by=By.CSS_SELECTOR,
-                                                value=OptionParam)
-    
+                                             value=OptionParam)
+
     ActionChains(driver)\
         .move_to_element(SelectElement)\
         .click()\
@@ -34,22 +34,22 @@ def CollectStudentList(driver: webdriver, CourseURL: str) -> list:
 
     for OptionNo in range(len(OptionElementList)):
         SelectElementList = driver.find_elements(by=By.CSS_SELECTOR,
-                                                value=SelectParam)
+                                                 value=SelectParam)
         SelectElement = SelectElementList[1]
         ActionChains(driver)\
             .move_to_element(SelectElement)\
             .click()\
             .perform()
-        
+
         sleep(0.5)
 
         OptionElementListTemp = driver.find_elements(by=By.CSS_SELECTOR,
-                                                value=OptionParam)
+                                                     value=OptionParam)
         ActionChains(driver)\
             .move_to_element(OptionElementListTemp[OptionNo])\
             .click()\
             .perform()
-        
+
         sleep(2)
 
         PageHTML = driver.page_source
