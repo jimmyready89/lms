@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'scraping',
 
-    'application.apps.master_data',
+    'application.master_data',
 ]
 
 MIDDLEWARE = [
