@@ -4,10 +4,9 @@ from django.utils.translation import gettext_lazy as _
 
 
 class Courses(models.Model):
-    TypeChoices = (
-        (1, _('CL')),
-        (2, _('LEC')),
-    )
+    class TypeChoices(models.IntegerChoices):
+        CL = (1, _('CL'))
+        LEC = (2, _('LEC'))
 
     subject = models.CharField(max_length=300, db_column="subject_code")
     name = models.CharField(max_length=300)
