@@ -39,7 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'scraping',
 
-    'application.master_data',
+    'application.apps.courses',
+    'application.apps.people',
+    'application.apps.period',
 ]
 
 MIDDLEWARE = [
