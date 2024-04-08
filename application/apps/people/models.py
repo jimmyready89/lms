@@ -9,7 +9,7 @@ class People(models.Model):
 
     code = models.CharField(primary_key=True, max_length=50)
     name = models.CharField(max_length=150)
-    type = models.IntegerField(choices=TypeChoices)
+    type = models.IntegerField(choices=TypeChoices.choices)
     email = models.EmailField()
     phone_no = models.CharField(max_length=14)
 
