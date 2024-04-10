@@ -20,6 +20,7 @@ class CustomUserManager(UserManager):
 
     def create_superuser(self, email: str, password: str, **extra_fields: Any) -> 'User':
         user = self.create_user(email=email, password=password, **extra_fields)
+        user.name = email.split('@')[0]
         user.is_staff = True
         user.is_active = True
         user.is_superuser = True
