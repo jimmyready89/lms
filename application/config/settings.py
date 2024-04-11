@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'application.apps.courses',
     'application.apps.people',
     'application.apps.period',
+    'application.apps.forum',
     'application.apps.group',
 ]
 
