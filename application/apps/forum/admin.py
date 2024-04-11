@@ -14,7 +14,7 @@ class ForumSessionAdmin(admin.ModelAdmin):
 
 class ForumThreadAdmin(admin.ModelAdmin):
     list_display = ['title', 'created', 'get_people', 'get_session']
-    search_fields = ['title', 'get_people', 'get_session']
+    search_fields = ['title', 'people__name', 'session_title']
     list_select_related = ['people', 'session']
 
     @admin.display(ordering='people', description='People')
@@ -28,7 +28,7 @@ class ForumThreadAdmin(admin.ModelAdmin):
 
 class ForumCommentAdmin(admin.ModelAdmin):
     list_display = ['body', 'created', 'get_people', 'get_thread']
-    search_fields = ['get_people', 'get_thread']
+    search_fields = ['people__name', 'thread__title']
     list_select_related = ['people', 'thread']
 
     @admin.display(ordering='people', description='People')
