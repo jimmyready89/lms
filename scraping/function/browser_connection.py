@@ -31,7 +31,6 @@ class BrowserConnection:
 
         self.playwright = playwright
         self.browser = playwright.chromium.connect_over_cdp(f"http://localhost:{port}")
-        pass
 
     def updateBrowserInformation(self):
         self.browser = self.playwright.chromium.connect_over_cdp(f"http://localhost:{self.port}")

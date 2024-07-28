@@ -3,6 +3,7 @@ from django.db import models
 
 class ScrapingBrowser(models.Model):
     port = models.IntegerField()
+    last_login = models.DateTimeField(null=True)
 
     def __str__(self) -> str:
         return ""
@@ -17,7 +18,7 @@ class ScrapingQueue(models.Model):
     end_datetime = models.DateTimeField(default=None, null=True)
 
     def __str__(self) -> str:
-        return ""
+        return f"{self.comment} {self.request_datetime}"
 
 
 class ScrapingActionList(models.Model):
