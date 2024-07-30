@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'application.apps.assessment',
     'application.apps.forum',
     'application.apps.group',
+    'application.apps.binus_account',
 ]
 
 MIDDLEWARE = [
